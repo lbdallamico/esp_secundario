@@ -1,7 +1,7 @@
 #ifndef SETTINGS_HT_H
 #define SETTINGS_HT_H
 
-#define CAIXA1
+#define CAIXA2
 
 // Global CPP defines
 #include <iostream>
@@ -60,7 +60,11 @@ typedef enum
     #define PIN_CAN     26
     #define BUTTON_1    25
     #define BUTTON_2    33
-    #define BUTTON_3    32 
+    #define BUTTON_3    32
+#elif defined(CAIXA2)
+    #define PIN_12V     14
+    #define PIN_5V      27
+    #define PIN_CAN     26
 #endif
 
 typedef struct {

@@ -121,26 +121,13 @@ int DeviceBox::Process(void)
         seja estado ou evento, os dois sistemas precisam
         ficar sabendo
     */
-    if (_lost_box > 3)
-    {
-        _local_data._event = ERROR_MODE;
-    }
     if (_is_data_coming == YES)
     {
-        _is_data_coming = NO;
-        if (_local_data._box_alive = ALIVE)
+        _local_data._routine = _recevid_data._routine;
+        if (_local_data._box_alive != _recevid_data._box_alive)
         {
-            _local_data._event = PERIPHEL_ON;
-            return PERIPHEL_ON;
+            _local_data._box_alive = ALIVE;
         }
-        else if (_local_data._box_alive = DEAD)
-        {
-            _local_data._event = PERIPHEL_OFF;
-            return PERIPHEL_OFF;
-        }
-    }
-    else if (snyc_esp() == 0 || _is_data_coming == ERRO)
-    {
         Send_Message();
     }
     return -1;
