@@ -16,10 +16,10 @@ void DeviceBox::Initializer(uint8_t * broadcast_address)
 {
     // clear trash values from struct
     // I cannot use memcpy because this variable are static!
-    _local_data._box_alive = DEAD;
+    _local_data._box_alive = ALIVE;
     _local_data._event = STARTING;
     _local_data._routine = INITIAL;
-    _recevid_data._box_alive = DEAD;
+    _recevid_data._box_alive = ALIVE; // temporaria gambiarra
     _recevid_data._event = STARTING;
     _recevid_data._routine = INITIAL;
 
@@ -52,13 +52,6 @@ void DeviceBox::Initializer(uint8_t * broadcast_address)
 
 DeviceBox::~DeviceBox(){}
 
-void DeviceBox::setEventButton(ROUTINE_TEST button_press)
-{
-    _local_data._routine = button_press;
-    // The idea is shows to box that has update on status
-    Send_Message();
-}
-
 ROUTINE_TEST DeviceBox::getCurrentRoutine(void)
 {
     return _local_data._routine;
@@ -68,6 +61,8 @@ EVENT_SYSTEM DeviceBox::getCurrentStatus(void)
 {
     return _local_data._event;
 }
+
+void DeviceBox::setResultTest(EVENT_SYSTEM result) {_local_data._event=result;}
 
 void DeviceBox::OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status)
 {
@@ -101,19 +96,6 @@ void DeviceBox::Send_Message(void)
     }
 }
 
-/*
-    @brief: Verifica se as esp estão sincronizadas através
-            dos eventos e rotinas
-    @param: Nothing
-    @return: TRUE  - Esp estão sincronizadas
-             FALSE - Desincronizadas
-*/
-bool DeviceBox::snyc_esp(void)
-{
-    if (_local_data._event != _recevid_data._event) return 0;
-    else return 1;
-}
-
 int DeviceBox::Process(void)
 {
     /*
@@ -128,7 +110,36 @@ int DeviceBox::Process(void)
         {
             _local_data._box_alive = ALIVE;
         }
+        if (_local_data._routine != _recevid_data._routine)
+        {
+            _local_data._routine = _recevid_data._routine;
+        }
         Send_Message();
+        return 1;
     }
-    return -1;
+    return 0;
+}
+
+void DeviceBox::Debug_SeeVariables()
+{
+    Serial.println("------------------------------");
+    Serial.println("**LOCAL DATA**");
+    Serial.print("{");
+    Serial.print("_event:");
+    Serial.print(_local_data._event);
+    Serial.print(" | _routine:");
+    Serial.print(_local_data._routine);
+    Serial.print(" | _box_alive:");
+    Serial.print(_local_data._box_alive);
+    Serial.println("}");
+    Serial.println("**RECIVED DATA**");
+    Serial.print("{");
+    Serial.print("_event:");
+    Serial.print(_recevid_data._event);
+    Serial.print(" | _routine:");
+    Serial.print(_recevid_data._routine);
+    Serial.print(" | _box_alive:");
+    Serial.print(_recevid_data._box_alive);
+    Serial.println("}");
+    Serial.println("------------------------------");
 }

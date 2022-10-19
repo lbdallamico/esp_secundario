@@ -24,13 +24,24 @@ typedef enum
 
 typedef enum 
 {
-    STARTING = 0,
+    STARTING = 1,
     ERROR_MODE,
     PERIPHEL_OFF,
     PERIPHEL_ON,
     TEST_PASS,
     TEST_FALL
 } EVENT_SYSTEM;
+
+typedef enum
+{
+    ANY_TEST_RUNNING = PERIPHEL_ON,
+    TEST_1_PASS,
+    TEST_1_FAIL,
+    TEST_2_PASS,
+    TEST_2_FAIL,
+    TEST_3_PASS,
+    TEST_3_FAIL,
+} FEEDBACK_TEST;
 
 typedef enum 
 {
@@ -71,6 +82,7 @@ typedef struct {
     EVENT_SYSTEM _event;
     ROUTINE_TEST _routine;
     STATUS_BOX_2 _box_alive;
+    FEEDBACK_TEST   _feedback_test;
 } struct_msg;
 
 // Global defines
@@ -82,8 +94,8 @@ class DeviceBox
         void Initializer(uint8_t * broadcast_address);
         void Send_Message(void);
         int Process(void);
-
-        void setEventButton(ROUTINE_TEST button_press);
+        void Debug_SeeVariables();
+        void setResultTest(EVENT_SYSTEM result);
         ROUTINE_TEST getCurrentRoutine(void);
         EVENT_SYSTEM getCurrentStatus(void);
 

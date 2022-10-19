@@ -3,7 +3,7 @@
 bool negador = 0;
 
 // REPLACE WITH THE MAC Address of your receiver 
-uint8_t broadcastAddress[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+uint8_t broadcastAddress[6] = {0xC0, 0x49, 0xEF, 0xD1, 0x9C, 0xD4};
 
 DeviceBox caixa_2;
 
@@ -44,4 +44,5 @@ void loop()
   }
   caixa_2.Process();
   delay(500);
+  caixa_2.Debug_SeeVariables();
 }
