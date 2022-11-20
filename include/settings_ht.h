@@ -76,6 +76,8 @@ typedef enum
     #define PIN_12V     14
     #define PIN_5V      27
     #define PIN_CAN     26
+    #define RANGE_HIGH_SIGNAL_LEVEL 3700
+    #define DEFAULT_DUCT_CYCLE (1/30)*1000000
 #endif
 
 typedef struct {
@@ -96,6 +98,7 @@ class DeviceBox
         int Process(void);
         void Debug_SeeVariables();
         void setResultTest(EVENT_SYSTEM result);
+        void setFeedbacTest(FEEDBACK_TEST feedback);
         ROUTINE_TEST getCurrentRoutine(void);
         EVENT_SYSTEM getCurrentStatus(void);
 

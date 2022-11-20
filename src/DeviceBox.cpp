@@ -83,6 +83,8 @@ void DeviceBox::OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int
     _is_data_coming = YES;
 }
 
+void DeviceBox::setFeedbacTest(FEEDBACK_TEST feedback) {_local_data._feedback_test = feedback;}
+
 void DeviceBox::Send_Message(void)
 {
     esp_err_t result = esp_now_send(__macAdress_receiver, 
