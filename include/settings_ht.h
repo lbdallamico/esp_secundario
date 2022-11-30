@@ -17,9 +17,10 @@
 typedef enum
 {
     INITIAL = 1,
-    CONTINUITY,
-    DUCT_CYCLE,
-    SENOIDAL,
+    CONTINUIDADE_CABO_1,
+    CONTINUIDADE_CABO_2,
+    CONTINUIDADE_CABO_3,
+    CONTINUIDADE_CABO_4,
 } ROUTINE_TEST;
 
 typedef enum 
@@ -41,6 +42,8 @@ typedef enum
     TEST_2_FAIL,
     TEST_3_PASS,
     TEST_3_FAIL,
+    TEST_4_PASS,
+    TEST_4_FAIL,
 } FEEDBACK_TEST;
 
 typedef enum 
@@ -66,19 +69,23 @@ typedef enum
 #if defined(CAIXA1)
     #define LED_RED     13
     #define LED_GRE     12
-    #define PIN_12V     14
-    #define PIN_5V      27
-    #define PIN_CAN     26
+    #define PIN_CABO_1  14
+    #define PIN_CABO_2  27
+    #define PIN_CABO_3  26
+    #define PIN_CABO_4  32 
     #define BUTTON_1    25
     #define BUTTON_2    33
-    #define BUTTON_3    32
 #elif defined(CAIXA2)
-    #define PIN_12V     14
-    #define PIN_5V      27
-    #define PIN_CAN     26
-    #define RANGE_HIGH_SIGNAL_LEVEL 3700
-    #define DEFAULT_DUCT_CYCLE (1/30)*1000000
+    #define PIN_CABO_1  14
+    #define PIN_CABO_2  27
+    #define PIN_CABO_3  26
+    #define PIN_CABO_4  32 
 #endif
+
+#define TIME_FEEDBACK_TEST  200
+#define DELAY_LOOP          400
+
+
 
 typedef struct {
     EVENT_SYSTEM _event;
