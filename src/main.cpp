@@ -33,13 +33,39 @@ void loop()
     delay(1000);
   }
   caixa_2.Debug_SeeVariables();
-  caixa_2.setFeedbacTest(Read_Current_Test(caixa_2.getCurrentRoutine()));
   caixa_2.Process();
+  caixa_2.setFeedbacTest(Read_Current_Test(caixa_2.getCurrentRoutine()));
   delay(DELAY_LOOP);
 }
 
 FEEDBACK_TEST Read_Current_Test(ROUTINE_TEST routine_current)
 {
+  switch (routine_current)
+  {
+  case INITIAL:
+    ;
+    break;
+  case CONTINUIDADE_CABO_1:
+    if (digitalRead(PIN_CABO_1) == 1) {return TEST_1_PASS; }
+    else {return TEST_1_FAIL; }
+    break;
+  case CONTINUIDADE_CABO_2:
+    if (digitalRead(PIN_CABO_2) == 1) {return TEST_2_PASS; }
+    else { return TEST_2_FAIL;}
+    break;
+  case CONTINUIDADE_CABO_3:
+    if (digitalRead(PIN_CABO_3) == 1) {return TEST_3_PASS; }
+    else { return TEST_3_FAIL; }
+    break;
+  case CONTINUIDADE_CABO_4:
+    if (digitalRead(PIN_CABO_4) == 1) {return TEST_4_PASS;}
+    else {return TEST_4_FAIL;}
+    break;
+  default:
+    break;
+  }
+  return ANY_TEST_RUNNING;
+  /*
   if (routine_current != INITIAL)
   {
     uint8_t index = 0;
@@ -62,7 +88,7 @@ FEEDBACK_TEST Read_Current_Test(ROUTINE_TEST routine_current)
     }
     return Converte_Feedback(true, routine_current);
   }
-  return Converte_Feedback(false, routine_current);
+  return Converte_Feedback(false, routine_current); */
 }
 
 FEEDBACK_TEST Converte_Feedback(bool isPass, ROUTINE_TEST routine_current)

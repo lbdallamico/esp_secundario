@@ -108,13 +108,10 @@ int DeviceBox::Process(void)
     if (_is_data_coming == YES)
     {
         _local_data._routine = _recevid_data._routine;
+        _local_data._event = _recevid_data._event;
         if (_local_data._box_alive != _recevid_data._box_alive)
         {
             _local_data._box_alive = ALIVE;
-        }
-        if (_local_data._routine != _recevid_data._routine)
-        {
-            _local_data._routine = _recevid_data._routine;
         }
         Send_Message();
         return 1;
@@ -133,6 +130,8 @@ void DeviceBox::Debug_SeeVariables()
     Serial.print(_local_data._routine);
     Serial.print(" | _box_alive:");
     Serial.print(_local_data._box_alive);
+    Serial.print(" | FEEDBACK:");
+    Serial.print(_local_data._feedback_test);
     Serial.println("}");
     Serial.println("**RECIVED DATA**");
     Serial.print("{");
