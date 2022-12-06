@@ -5,6 +5,7 @@
 
 // Global CPP defines
 #include <iostream>
+#include <vector>
 
 // Private includes
 #include <Arduino.h>
@@ -16,7 +17,7 @@
 // Global defines
 typedef enum
 {
-    INITIAL = 1,
+    INITIAL,
     CONTINUIDADE_CABO_1,
     CONTINUIDADE_CABO_2,
     CONTINUIDADE_CABO_3,
@@ -25,7 +26,7 @@ typedef enum
 
 typedef enum 
 {
-    STARTING = 1,
+    STARTING,
     ERROR_MODE,
     PERIPHEL_OFF,
     PERIPHEL_ON,
@@ -33,7 +34,7 @@ typedef enum
 
 typedef enum
 {
-    ANY_TEST_RUNNING = PERIPHEL_ON,
+    ANY_TEST_RUNNING,
     TEST_1_PASS,
     TEST_1_FAIL,
     TEST_2_PASS,
