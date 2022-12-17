@@ -33,8 +33,9 @@ void loop()
     delay(1000);
   }
   caixa_2.Debug_SeeVariables();
-  caixa_2.Process();
+  
   caixa_2.setFeedbacTest(Read_Current_Test(caixa_2.getCurrentRoutine()));
+  caixa_2.Process();
   delay(DELAY_LOOP);
 }
 
@@ -65,30 +66,6 @@ FEEDBACK_TEST Read_Current_Test(ROUTINE_TEST routine_current)
     break;
   }
   return ANY_TEST_RUNNING;
-  /*
-  if (routine_current != INITIAL)
-  {
-    uint8_t index = 0;
-    for (index = 0; index < 4; index++)
-    {
-      if (routine_current == Sequencia_Cabo[index])
-      {
-        if(digitalRead(Sequencia_Cabo[index]) == LOW)
-        {
-          return Converte_Feedback(false, routine_current);
-        }
-      }
-      else
-      {
-        if(digitalRead(Sequencia_Cabo[index]) == HIGH)
-        {
-          return Converte_Feedback(false, routine_current);
-        }
-      }
-    }
-    return Converte_Feedback(true, routine_current);
-  }
-  return Converte_Feedback(false, routine_current); */
 }
 
 FEEDBACK_TEST Converte_Feedback(bool isPass, ROUTINE_TEST routine_current)

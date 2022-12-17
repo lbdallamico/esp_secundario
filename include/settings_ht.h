@@ -65,15 +65,6 @@ typedef enum
 } ButtonStatus;
 
 // PINOUT LED
-#if defined(CAIXA1)
-    #define LED_RED     13
-    #define LED_GRE     12
-    #define PIN_CABO_1  14
-    #define PIN_CABO_2  27
-    #define PIN_CABO_3  26
-    #define PIN_CABO_4  32 
-    #define BUTTON_1    25
-    #define BUTTON_2    33
 #elif defined(CAIXA2)
     #define PIN_CABO_1  13
     #define PIN_CABO_2  12

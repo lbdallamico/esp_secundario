@@ -137,18 +137,14 @@ int DeviceBox::Process(void)
         seja estado ou evento, os dois sistemas precisam
         ficar sabendo
     */
-    if (_is_data_coming == YES)
+    _local_data._routine = _recevid_data._routine;
+    _local_data._event = _recevid_data._event;
+    if (_local_data._box_alive != _recevid_data._box_alive)
     {
-        _local_data._routine = _recevid_data._routine;
-        _local_data._event = _recevid_data._event;
-        if (_local_data._box_alive != _recevid_data._box_alive)
-        {
-            _local_data._box_alive = ALIVE;
-        }
-        Send_Message();
-        return 1;
+        _local_data._box_alive = ALIVE;
     }
-    return 0;
+    Send_Message();
+    return 1;
 }
 
 void DeviceBox::Debug_SeeVariables()
